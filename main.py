@@ -4,9 +4,9 @@ from telethon import TelegramClient, events, Button
 import sqlite3
 import os
 
-api_id = 28146275
-api_hash = 'ea9aca8caf15a6e62d71ecca5b6a404d'
-bot_token = '5664765963:AAEFNk5x5XEunTZw1sLS0NVpPlwlRWbRAAY'
+api_id = YOUR_API_ID
+api_hash = 'YOUR_API_HASH'
+bot_token = 'YOUR_BOT_TOKEN'
 
 kimya = {
   'kimya':{'Hansı metal bakterisid xassəsinə malikdir?':'Gümüş','Müxtlif maddələrin qarışığından ibarət olan substansiya necə adlanır?':'Qarışıq','Kimyəvi reaksiyanın istilik effekti göstərilən kimyəvi reaksiya tənliyi necə adlanır?':'Termokimyəvi','Maddənin həll olmasının temperaturdan asılılıq qrafiki necə adlanır?':'Həllolma əyrisi','Dəmir, alüminium və natrium metallarından hansı dəyişgən valentlidir?':'Dəmir','Gümüş əşyaların qaralması hansı hadısələrə aiddir?':'Kimyəvi hadisələrə','Separatorlarda yağ südün qalan hissəsindən hansı üsul ilə ayrılır?':'Sentrifuqa üsulu ilə','Daimi komponentlərindən biri azot olan təbii qarışığı göstərin?':'Hava','Havanın tərkibindəki qazlardan hansı birinci kəşv olunub?':'Oksigen','Təbaşirin, mərmərin, əhəng daşının əsasını hansı maddə təşkil edir?':'Kalsium karbonat','Yer qabığında hansı metallar daha geniş yayılmışdır?':'Alüminium və dəmir','Tərkibində 2%-dən çox karbon, silisiumun, manqanın, fosforun və kükürdün əlavələri olan dəmir ərintisi neçə adlanır?':'Çuqun','Hansı turşu bütün canlıların əsası olan elementə malikdir?':'Karbonat turşusu','Aşağıdakı qazlardan hansı təbii birləşmə deyil: metan, dəm qazı, karbon qazı?':'Dəm qazı','Ağır maye metalı adlandırın ?':'Civə','Birinci dünya müharibəsində hansı qaz kimyəvi silah kimi istifadə olunmuşdur?':'Xlor','Dəniz kələmi hansı elemetn ilə zəngindir və onun insan organizimində çatışmazlığı qalxanabənzər vəzin xəstəliyinə səbəb olur?':'Yod','Sümük qırıldıqda sarğı qoymaq üçün tibbdə istifadə olunan kimyəvi maddənin adı nədir?':'Gips','Veneranın atmosferinin əsasını hansı qaz təşkil edir və Yerdə meyvə şirəsi almaq üçün istifadə olunur?':'Karbon qazı','Kimyəvi elementlərin simvollarını yazın: Oksigen, Nitrogen, Hidrogen, Qızıl, Gümüş':'O, N, H, Au, Ag','Birinci qrup elementlərində valent elektronları sayı hansıdır?':'1','Kimyəvi elementlərin simvollarını yazın: Kalsium, Barium, Kripton, Bor, radium':'Ca, Ba, Kr, B, Ra','Azotun simvolu hansıdır?':'N','Bir elementin atom nömrəsi 17-dir. Bu elementin kimyəvi simvolu nədir? ':'Cl','Bir elementin atom nömrəsi nədir?':'Protonların sayı','Bir elementin atom nömrəsi 11-dir. Bu elementin kimyəvi simvolu nədir?':'Na','Bir elementin atom nömrəsi 26-dir. Bu elementinnədir?':'Ca','Bir elementin atom nömrəsi 30-dur. Bu elementin kimyəvi simvolu nədir?':'Zn','Bir elementin atom nömrəsi 29-dur. Bu elementin kimyəvi simvolu nədir?':'Cu','Hansı kimyəvi element həm metal, həm də amfoterdir?':'Alüminium'
@@ -44,24 +44,23 @@ informatika= {
   
 }
 
-# Telethon istemcisini oluşturun ve bağlantıyı kurun
+
 client = TelegramClient('bot', api_id, api_hash).start(bot_token=bot_token)
 
                                 
 
-# /ksoru komutuyla çağrılan fonksiyon
 @client.on(events.NewMessage(pattern='/ksual'))
 async def send_question(event):
-    # Soru listesinden rastgele bir kategori seçin
+
     kategori = random.choice(list(kimya.keys()))
 
-    # Seçilen kategoriden rastgele bir soru seçin
+
     soru, cevap = random.choice(list(kimya[kategori].items()))
 
-    # Seçilen soruyu gönderin
+
     await event.reply(f'{soru}')
 
-    # Cevap doğruysa tebrik edin
+
     @client.on(events.NewMessage)
     async def check_answer(answer):
         if answer.raw_text == cevap:
@@ -70,16 +69,14 @@ async def send_question(event):
 
 @client.on(events.NewMessage(pattern='/fsual'))
 async def send_question(event):
-    # Soru listesinden rastgele bir kategori seçin
+    
     kategori = random.choice(list(fizika.keys()))
 
-    # Seçilen kategoriden rastgele bir soru seçin
+
     soru, cevap = random.choice(list(fizika[kategori].items()))
 
-    # Seçilen soruyu gönderin
     await event.reply(f'{soru}')
 
-    # Cevap doğruysa tebrik edin
     @client.on(events.NewMessage)
     async def check_answer(answer):
         if answer.raw_text == cevap:
@@ -89,16 +86,12 @@ async def send_question(event):
 
 @client.on(events.NewMessage(pattern='/rsual'))
 async def send_question(event):
-    # Soru listesinden rastgele bir kategori seçin
+
     kategori = random.choice(list(riyaziyyat.keys()))
 
-    # Seçilen kategoriden rastgele bir soru seçin
     soru, cevap = random.choice(list(riyaziyyat[kategori].items()))
-
-    # Seçilen soruyu gönderin
     await event.reply(f'{soru}')
 
-    # Cevap doğruysa tebrik edin
     @client.on(events.NewMessage)
     async def check_answer(answer):
         if answer.raw_text == cevap:
@@ -107,29 +100,27 @@ async def send_question(event):
 
 @client.on(events.NewMessage(pattern='/isual'))
 async def send_question(event):
-    # Soru listesinden rastgele bir kategori seçin
+
     kategori = random.choice(list(informatika.keys()))
 
-    # Seçilen kategoriden rastgele bir soru seçin
+
     soru, cevap = random.choice(list(informatika[kategori].items()))
 
-    # Seçilen soruyu gönderin
+
     await event.reply(f'{soru}')
 
-    # Cevap doğruysa tebrik edin
+
     @client.on(events.NewMessage)
     async def check_answer(answer):
         if answer.raw_text == cevap:
             await answer.reply(f'**🏆 TƏBRIKLƏR {answer.sender.first_name},** -----------\n{soru}\n--------------**SUALINA DOĞRU CAVAB VERDINIZ🥳**')
             client.remove_event_handler(check_answer)  
 
-# Define the start command handler
 @client.on(events.NewMessage(pattern='/start'))
 async def start_handler(event):
-    # Send a photo message
+
     response = requests.get('https://media.istockphoto.com/id/980135076/tr/vekt%C3%B6r/mezun-%C3%B6%C4%9Frenci-simgesi.jpg?s=170667a&w=0&k=20&c=SpNrEaejDnbpNGZYyJzTB7mA1OluqWZCxhcHB1oll6o=')
     photo = await client.upload_file(response.content)
-    # Send 5 buttons
     buttons = [
         [Button.url('➕ 𝐌𝐄𝐍𝐈 𝐐𝐑𝐔𝐏𝐔𝐍𝐀 𝐄𝐋𝐀𝐕𝐄 𝐄𝐓 ➕', 'https://t.me/Enodersbot?startgroup=true')],
         [Button.url('📚 𝐍𝐞𝐜𝐞 𝐢𝐬𝐭𝐢𝐟𝐚𝐝𝐞 𝐞𝐭𝐦𝐞𝐥𝐢? 📚', 'https://t.me/Enobots/24')],
